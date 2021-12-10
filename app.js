@@ -2,10 +2,11 @@ import { renderGoblin } from './render-utils.js';
 // import functions and grab DOM elements
 const form = document.querySelector('form');
 const defeatedNumber = document.querySelector('#defeated-number');
-const defeatedList = document.querySelector('.defeated-list');
-const playerHPElem = document.querySelector('.player-hp');
+// const defeatedList = document.querySelector('.defeated-list');
+const playerHPElem = document.querySelector('#player-hp');
 const playerImg = document.querySelector('#player-img');
 const goblinList = document.querySelector('.current-goblins');
+
 // let state
 let playerHP = 10;
 let goblinInfo = [
@@ -24,46 +25,48 @@ form.addEventListener('submit', (e) => {
 
     const newGoblin = {
         name: goblinName,
-        hp: 3,
+        hp: Math.floor(Math.random() * 5),
     };
   // add obj to array of goblins (in state)
     goblinInfo.push(newGoblin);
 
     displayGoblins();
 
+    form.reset();
 });
 
 function displayGoblins() {
     //update list and clear list DOM
     goblinList.textContent = '';
     
-    for (let goblin of goblinInfo) {
-        const goblinDiv = renderGoblin(goblin);
-    
+    for (let goblinData of goblinInfo) {
+        
+        const goblinDiv = renderGoblin(goblinData);
 
-        if (goblinInfo.hp > 0) {
+
+        if (goblinData.hp > 0) {
             goblinDiv.addEventListener('click', () => {
                 const randomNum = Math.random();
-
+                
                 if (randomNum < .33) {
-                    goblinInfo.hp--;
-                    alert(`you hit ${goblinInfo.name} with one of your arrows`);
+                    goblinData.hp--;
+                    alert(`you hit ${goblinData.name} with one of your arrows`);
                 } else {
-                    alert(`you missed ${goblinInfo.name} and are shamed`);
+                    alert(`you missed ${goblinData.name} and are shamed`);
                 }
 
                 if (randomNum < .5) {
                     playerHP--;
-                    alert(`Watch out! ${goblinInfo.name} hit you!`);
+                    alert(`Watch out! ${goblinData.name} hit you!`);
                 } else {
-                    alert(`Close one! ${goblinInfo.name} attacked you and missed`);
+                    alert(`Close one! ${goblinData.name} attacked you and missed`);
                 }
 
-                if (goblinInfo.hp === 0) {
+                if (goblinData.hp === 0) {
                     defeatedCount++;
-                    alert(`Victory!! You've defeated ${goblinInfo.name}`);
+                    alert(`Victory!! You've defeated ${goblinData.name}`);
                 }
-
+                
                 if (playerHP === 0) {
                     playerImg.classList.add('game-over');
                     alert('GAME OVER!!!');
@@ -71,10 +74,10 @@ function displayGoblins() {
 
                 playerHPElem.textContent = playerHP;
                 defeatedNumber.textContent = defeatedCount;
-
+                
                 displayGoblins();
             });
-
+            
         } 
 
         goblinList.append(goblinDiv);
