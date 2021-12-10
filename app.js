@@ -25,13 +25,13 @@ form.addEventListener('submit', (e) => {
 
     const newGoblin = {
         name: goblinName,
-        hp: 3,
+        hp: Math.floor(Math.random() * 5),
     };
   // add obj to array of goblins (in state)
     goblinInfo.push(newGoblin);
 
     displayGoblins();
-    
+
     form.reset();
 });
 

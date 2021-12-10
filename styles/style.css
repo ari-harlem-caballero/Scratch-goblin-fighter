@@ -16,6 +16,9 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
+    width: 80%;
+    min-width: 50%;
+    /* justify-content: center; */
 }
 
 .player-stats {
@@ -23,18 +26,54 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
+    margin: 20px 200px 20px 80px;
 }
 
 .defeated {
-    margin: 20px 0 80px 0;
+    margin: 20px 0 60px 0;
     border: red 2px solid;
+}
+
+.defeated p {
+    font-size: 20px;
+    padding: 0 15px 0 15px;
+}
+
+.player p {
+    font-size: 30px;
 }
 
 #player-img {
     width: 300px;
 }
 
+input, textarea {
+    font-size: 20px;
+    width: 180px;
+    border-radius: 20px;
+}
+
+.goblin-stats {
+    padding: 40px;
+}
+
 .current-goblins {
+    width: 270px;
+}
+
+.goblin {
     border: red 2px solid;
-    min-height: 200px;
+    border-radius: 20px;
+    margin: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 20px;
+    line-height: 4px;
+}
+
+.goblin-emoji {
+    font-size: 40px;
+    margin: 10px;
 }
