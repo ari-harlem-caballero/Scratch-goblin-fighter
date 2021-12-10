@@ -1,3 +1,4 @@
+import { renderGoblin } from './render-utils.js';
 // import functions and grab DOM elements
 const form = document.querySelector('form');
 const defeatedNumber = document.querySelector('#defeated-number');
@@ -36,6 +37,9 @@ function displayGoblins() {
     //update list and clear list DOM
     goblinList.textContent = '';
     
+    for (let goblin of goblinInfo) {
+        const goblinDiv = renderGoblin(goblin);
+    
 
         if (goblinInfo.hp > 0) {
             goblinDiv.addEventListener('click', () => {
@@ -71,7 +75,8 @@ function displayGoblins() {
                 displayGoblins();
             });
 
-        }
+        } 
+
         goblinList.append(goblinDiv);
     }
 }
