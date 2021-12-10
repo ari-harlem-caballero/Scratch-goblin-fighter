@@ -51,7 +51,11 @@ function displayGoblins() {
         goblinDiv.append(goblinFace, goblinNameElem, goblinHP);
 
         goblinDiv.addEventListener('click', () => {
-            alert(`${goblinInfo.name} was clicked!`);
+            goblinInfo.hp--;
+            
+            playerHP--;
+
+            defeatedCount++;
         });
 
         goblinList.append(goblinDiv);
