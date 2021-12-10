@@ -13,7 +13,16 @@ let goblinInfo = [
 ];
 let defeatedCount = 0;
 
-// set event listeners 
+// set event listeners (form, displayGoblin --> list)
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const data = new FormData(form);
+
+    const goblinName = data.get('goblin-name');
+
+    
+});
   // get user input
   // use user input to update state 
   // update DOM to reflect the new state
