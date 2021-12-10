@@ -27,21 +27,33 @@ form.addEventListener('submit', (e) => {
     };
   // add obj to array of goblins (in state)
     goblinInfo.push(newGoblin);
-  // update list DOM (goblinList)
+
+    displayGoblins();
+
+});
+
+function displayGoblins() {
+    //update list and clear list DOM
     goblinList.textContent = '';
-  // loop thru goblins (make holder for ea part of goblin--DIV, face, name, hp)
+    
     for (let goblin of goblinInfo) {
         const goblinDiv = document.createElement('div');
         const goblinFace = document.createElement('p');
         const goblinNameElem = document.createElement('p');
         const goblinHP = document.createElement('p');
 
+        goblinDiv.classList.add('goblin');
+
         goblinNameElem.textContent = goblinInfo.name;
         goblinHP.textContent = goblinInfo.hp;
         goblinFace.textContent = goblinInfo.hp > 0 ? '👹' : '💥';
-        // append div to list of gobs
+      // append (p to D, div to list of gobs)
+        goblinDiv.append(goblinFace, goblinNameElem, goblinHP);
+
+        goblinDiv.addEventListener('click', () => {
+            alert(`${goblinInfo.name} was clicked!`);
+        });
+
         goblinList.append(goblinDiv);
     }
-});
-
-displayGoblins();
+}
