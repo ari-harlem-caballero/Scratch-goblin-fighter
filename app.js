@@ -36,28 +36,44 @@ function displayGoblins() {
     //update list and clear list DOM
     goblinList.textContent = '';
     
-    for (let goblin of goblinInfo) {
-        const goblinDiv = document.createElement('div');
-        const goblinFace = document.createElement('p');
-        const goblinNameElem = document.createElement('p');
-        const goblinHP = document.createElement('p');
 
-        goblinDiv.classList.add('goblin');
+        if (goblinInfo.hp > 0) {
+            goblinDiv.addEventListener('click', () => {
+                const randomNum = Math.random();
 
-        goblinNameElem.textContent = goblinInfo.name;
-        goblinHP.textContent = goblinInfo.hp;
-        goblinFace.textContent = goblinInfo.hp > 0 ? '👹' : '💥';
-      // append (p to D, div to list of gobs)
-        goblinDiv.append(goblinFace, goblinNameElem, goblinHP);
+                if (randomNum < .33) {
+                    goblinInfo.hp--;
+                    alert(`you hit ${goblinInfo.name} with one of your arrows`);
+                } else {
+                    alert(`you missed ${goblinInfo.name} and are shamed`);
+                }
 
-        goblinDiv.addEventListener('click', () => {
-            goblinInfo.hp--;
-            
-            playerHP--;
+                if (randomNum < .5) {
+                    playerHP--;
+                    alert(`Watch out! ${goblinInfo.name} hit you!`);
+                } else {
+                    alert(`Close one! ${goblinInfo.name} attacked you and missed`);
+                }
 
-            defeatedCount++;
-        });
+                if (goblinInfo.hp === 0) {
+                    defeatedCount++;
+                    alert(`Victory!! You've defeated ${goblinInfo.name}`);
+                }
 
+                if (playerHP === 0) {
+                    playerImg.classList.add('game-over');
+                    alert('GAME OVER!!!');
+                }
+
+                playerHPElem.textContent = playerHP;
+                defeatedNumber.textContent = defeatedCount;
+
+                displayGoblins();
+            });
+
+        }
         goblinList.append(goblinDiv);
     }
 }
+
+displayGoblins();
