@@ -21,8 +21,27 @@ form.addEventListener('submit', (e) => {
 
     const goblinName = data.get('goblin-name');
 
-    
+    const newGoblin = {
+        name: goblinName,
+        hp: 3,
+    };
+  // add obj to array of goblins (in state)
+    goblinInfo.push(newGoblin);
+  // update list DOM (goblinList)
+    goblinList.textContent = '';
+  // loop thru goblins (make holder for ea part of goblin--DIV, face, name, hp)
+    for (let goblin of goblinInfo) {
+        const goblinDiv = document.createElement('div');
+        const goblinFace = document.createElement('p');
+        const goblinNameElem = document.createElement('p');
+        const goblinHP = document.createElement('p');
+
+        goblinNameElem.textContent = goblinInfo.name;
+        goblinHP.textContent = goblinInfo.hp;
+        goblinFace.textContent = goblinInfo.hp > 0 ? '👹' : '💥';
+        // append div to list of gobs
+        goblinList.append(goblinDiv);
+    }
 });
-  // get user input
-  // use user input to update state 
-  // update DOM to reflect the new state
+
+displayGoblins();
